@@ -1,12 +1,12 @@
 # Bridges To Prosperity
 
-You can find the deployed project at https://b.bridgestoprosperity.dev/
+You can find the deployed project at https://27a.bridgestoprosperity.dev/
+Previous cohort: https://b.bridgestoprosperity.dev/
 
-You can find the demo video for this project at https://youtu.be/UkJIj0PbvIk
-
+You can find the demo video for this project at https://youtu.be/frpHHafi3po
+Previous cohort:https://youtu.be/UkJIj0PbvIk
 
 ## 4️⃣ Contributors
-
 
 |                                           [Devin Moore](https://github.com/devjaymoe)                                           |                                       [Joo Woon Kang](https://github.com/joowoonk)                                        |                                                     [Robert Misch](https://github.com/RobertMisch)                                                     |                                          [Jessica Cooper](https://github.com/JessicaGCooper)                                           |
 | :-----------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
@@ -18,7 +18,8 @@ You can find the demo video for this project at https://youtu.be/UkJIj0PbvIk
 
 ## Project Overview
 
-1️⃣ [Trello Board](https://trello.com/b/x1iIzJdj/labs25bridgesjessica)
+1️⃣ [Trello Board](https://trello.com/b/vvO28bPw/labs-27-bridges-to-prosperity-team-a)
+Previous Cohort: https://trello.com/b/x1iIzJdj/labs25bridgesjessica
 
 1️⃣ [Product Canvas](https://whimsical.com/CenFtxG9x65uEptPgBSEQw)
 
@@ -48,7 +49,6 @@ Our website receives and displays from data from our backend API. Displays data 
 - Formik & Yup
 - Node-Sass
 
-
 #### _Front end framework goes here_
 
 - React
@@ -61,11 +61,11 @@ List the rest of the front end features and libraries in the same format as the 
 
 #### Front end deployed to `AWS`
 
-https://b.bridgestoprosperity.dev/
+https://27a.bridgestoprosperity.dev/
 
 #### [Back end] built using:
 
-https://github.com/Lambda-School-Labs/Labs25-Bridges_to_Prosperity-TeamB-be
+https://github.com/Lambda-School-Labs/bridges-to-prosperity-be-a/tree/main
 
 #### back end framework goes here
 
@@ -78,14 +78,11 @@ https://github.com/Lambda-School-Labs/Labs25-Bridges_to_Prosperity-TeamB-be
 
 ## 2️⃣ Authentication API here
 
-
 Okta API for Authentication:
-
 
 The Okta Identity Cloud gives you one trusted platform to secure every identity in your organization and connect with all your customers.
 
 ## 3️⃣ Environment Variables
-
 
 ```md
 REACT_APP_CLIENT_ID=0oalwt....
@@ -102,7 +99,6 @@ REACT_APP_MAPBOX_TOKEN='pk.eyJ1Ij......'
 | ----------------- | ---------------- | ------------------------------------------------ |
 | green bridge icon | Icons8           | [Icons8](https://icons8.com/license)             |
 | rings.svg         | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders) |
-
 
 All the other images provided from Bridges to Prosperity
 
