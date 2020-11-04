@@ -2,8 +2,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { MenuOutlined } from '@ant-design/icons';
 import useKeypress from '../../common/UseKeypress';
-import bridgePin from '../../../styles/imgs/pin.png';
-import React, { useState, useRef, useContext } from 'react';
+
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import ReactMapGL, {
   FullscreenControl,
   NavigationControl,
@@ -15,6 +15,13 @@ import { BridgesContext } from '../../../state/bridgesContext';
 // import DetailsInfo from './DetailsInfo';
 import BridgeCard from './bridge_card';
 import FilterBridgesCheckboxes from './FilterBridgesCheckboxes';
+import bridgePin from '../../../styles/imgs/pin.png';
+import rejectPin from '../../../styles/imgs/newIcons/Rejected.png';
+import completedPin from '../../../styles/imgs/newIcons/Completed.png';
+import identifiedPin from '../../../styles/imgs/newIcons/Identified.png';
+import confirmedPin from '../../../styles/imgs/newIcons/Confirmed.png';
+import prospectingPin from '../../../styles/imgs/newIcons/Prospecting.png';
+import underConstructionPin from '../../../styles/imgs/newIcons/Under Construction.png';
 
 let maxBounds = {
   minLatitude: -70,
@@ -58,17 +65,84 @@ const RenderMap = () => {
 
   //this will run function after brindges will be filtered
   function certainBridgeShows(bridges) {
-    bridges.forEach(bridge =>
-      featureCollection.push({
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [bridge.long, bridge.lat],
-        },
-      })
-    );
+    bridges.forEach(bridge => {
+      if (bridge.project_stage === 'Rejected') {
+        featureCollection.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [bridge.long, bridge.lat],
+          },
+          properties: {
+            title: 'Rejected',
+          },
+        });
+      } else if (bridge.project_stage === 'Complete') {
+        featureCollection.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [bridge.long, bridge.lat],
+          },
+          properties: {
+            title: 'Complete',
+          },
+        });
+      } else if (bridge.project_stage === 'Identified') {
+        featureCollection.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [bridge.long, bridge.lat],
+          },
+          properties: {
+            title: 'Identified',
+          },
+        });
+      } else if (bridge.project_stage === 'Confirmed') {
+        featureCollection.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [bridge.long, bridge.lat],
+          },
+          properties: {
+            title: 'Confirmed',
+          },
+        });
+      } else if (bridge.project_stage === 'Prospecting') {
+        featureCollection.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [bridge.long, bridge.lat],
+          },
+          properties: {
+            title: 'Prospecting',
+          },
+        });
+      } else if (bridge.project_stage === 'Under Construction') {
+        featureCollection.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [bridge.long, bridge.lat],
+          },
+          properties: {
+            title: 'Under Construction',
+          },
+        });
+      } else {
+        featureCollection.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [bridge.long, bridge.lat],
+          },
+        });
+      }
+    });
   }
-
   // bridges are now being filtered by the bidge stages
   if (bridgeData) {
     let rejected = bridgeData.filter(
@@ -196,9 +270,35 @@ const RenderMap = () => {
         onLoad={() => {
           if (!mapRef) return;
           const map = mapRef.current.getMap();
+
           map.loadImage(bridgePin, (error, image) => {
             if (error) return;
             map.addImage('myPin', image);
+          });
+
+          map.loadImage(rejectPin, (error, image) => {
+            if (error) return;
+            map.addImage('rejectPin', image);
+          });
+          map.loadImage(completedPin, (error, image) => {
+            if (error) return;
+            map.addImage('completedPin', image);
+          });
+          map.loadImage(identifiedPin, (error, image) => {
+            if (error) return;
+            map.addImage('identifiedPin', image);
+          });
+          map.loadImage(confirmedPin, (error, image) => {
+            if (error) return;
+            map.addImage('confirmedPin', image);
+          });
+          map.loadImage(prospectingPin, (error, image) => {
+            if (error) return;
+            map.addImage('prospectingPin', image);
+          });
+          map.loadImage(underConstructionPin, (error, image) => {
+            if (error) return;
+            map.addImage('underConstructionPin', image);
           });
         }}
       >
@@ -206,9 +306,41 @@ const RenderMap = () => {
           <Layer
             id="data"
             type="symbol"
-            layout={{ 'icon-image': 'myPin', 'icon-size': 0.75 }}
+            layout={{
+              'icon-image': [
+                'match',
+                ['get', 'title'],
+                'Rejected',
+                'rejectPin',
+                'Complete',
+                'completedPin',
+                'Identified',
+                'identifiedPin',
+                'Confirmed',
+                'confirmedPin',
+                'Prospecting',
+                'prospectingPin',
+                'Under Construction',
+                'underConstructionPin',
+                'myPin',
+              ],
+              'icon-size': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                4,
+                0.45,
+                6,
+                0.35,
+                10,
+                0.25,
+                15,
+                0.2,
+              ],
+            }}
           />
         </Source>
+
         <div className="toggle">
           <MenuOutlined
             onClick={() => {
