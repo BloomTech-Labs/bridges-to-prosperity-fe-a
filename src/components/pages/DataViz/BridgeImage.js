@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { LinearInterpolator } from 'react-map-gl';
 import { BridgesContext } from '../../../state/bridgesContext';
-
 const BridgeImage = ({ marker, setViewport }) => {
   const { setDetailsData } = useContext(BridgesContext);
 
