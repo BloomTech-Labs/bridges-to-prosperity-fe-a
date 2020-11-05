@@ -42,22 +42,38 @@ const BridgeCard = () => {
   };
 
   return (
-    <Draggable>
-      <div className="detailsContainer">
-        <Card className={detailsData.root}>
-          <CardActionArea>
-            <div className="closeArea">
-              <div
-                className="close_button"
-                // className="closeButton"
-                onKeyDown={e => {
-                  console.log(e);
-                }}
-                onClick={() => setDetailsData(null)}
-              >
-                Close
-              </div>
+    // <Draggable>
+    <div className="detailsContainer">
+      <Card className={detailsData.root}>
+        <CardActionArea>
+          <div className="closeArea">
+            <div
+              className="close_button"
+              // className="closeButton"
+              onKeyDown={e => {
+                console.log(e);
+              }}
+              onClick={() => setDetailsData(null)}
+            >
+              Close
             </div>
+          </div>
+          <CardContent id="card_content">
+            <Typography
+              id="bridge_name_text"
+              gutterBottom
+              style={{ color: 'white' }}
+              color="inherit"
+              variant="h5"
+              component="h2"
+              width="100%"
+            >
+              <strong>
+                {' '}
+                <span id="bridge_name_intro"> Bridge name:</span>{' '}
+                {detailsData.bridge_site_name}
+              </strong>
+            </Typography>
             <div className="bridge-image">
               {detailsData.bridge_image ? (
                 <CardMedia
@@ -67,31 +83,13 @@ const BridgeCard = () => {
                   image={detailsData.bridge_image}
                 />
               ) : (
-                <div className="no-bridge-image">
-                  Bridge Image is Unavailiable
-                </div>
+                <div></div>
               )}
             </div>
-            <CardContent id="card_content">
-              <Typography
-                id="bridge_name_text"
-                gutterBottom
-                style={{ color: 'white' }}
-                color="inherit"
-                variant="h5"
-                component="h2"
-                width="100%"
-              >
-                <strong>
-                  {' '}
-                  <span id="bridge_name_intro"> Bridge name:</span>{' '}
-                  {detailsData.bridge_site_name}
-                </strong>
-                <div clasName="graphDiv">
+            {/* <div clasName="graphDiv">
                   <RenderGraph data={detailsData} />
-                </div>
-              </Typography>
-              <IconButton
+                </div> */}
+            {/* <IconButton
                 style={{ color: 'white' }}
                 className={clsx(classes.expand, {
                   [classes.expandOpen]: expanded,
@@ -101,69 +99,63 @@ const BridgeCard = () => {
                 aria-label="show more"
               >
                 <ExpandMoreIcon />
-              </IconButton>
-            </CardContent>
-          </CardActionArea>
+              </IconButton> */}
+          </CardContent>
+        </CardActionArea>
 
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Typography paragraph>
-                <div className="bottom_info">
-                  <div className="bottom_info_cols">
-                    <p>
-                      <span className="bottomInfoTags">Province:</span>{' '}
-                      {detailsData.province}
-                    </p>
-                    <p>
-                      <span className="bottomInfoTags">District:</span>{' '}
-                      {detailsData.district}
-                    </p>
-                    <p>
-                      <span className="bottomInfoTags">Bridge Type:</span>{' '}
-                      {detailsData.type}
-                    </p>
-                    <p>
-                      <span className="bottomInfoTags">Project Sub Stage:</span>{' '}
-                      {detailsData.sub_stage}
-                    </p>
-                    <p>
-                      <span className="bottomInfoTags">Project Stage:</span>{' '}
-                      {detailsData.stage}
-                    </p>
-                  </div>
-                  <div className="bottom_info_cols">
-                    <p>
-                      <span className="bottomInfoTags">
-                        Estimate of People Served:
-                      </span>{' '}
-                      {detailsData.Individuals_directly_served}
-                    </p>
-                    <p>
-                      <span className="bottomInfoTags">
-                        AVG Households Served:
-                      </span>{' '}
-                      {detailsData.inc_income}
-                    </p>
-                    <p>
-                      <span className="bottomInfoTags">
-                        Economic Impact (RWF):
-                      </span>{' '}
-                      {detailsData.inc_income_rwf}
-                    </p>
-                    <p>
-                      <span className="bottomInfoTags">
-                        Economic Impact (USD):
-                      </span>{' '}
-                      {detailsData.inc_income_usd}
-                    </p>
-                  </div>
-                </div>
-              </Typography>
-            </CardContent>
-          </Collapse>
-        </Card>
-      </div>
-    </Draggable>
+        {/* <Collapse in={expanded} timeout="auto" unmountOnExit> */}
+        <CardContent>
+          <Typography paragraph>
+            <div className="bottom_info">
+              <div className="bottom_info_cols">
+                <p>
+                  <span className="bottomInfoTags">Province:</span>{' '}
+                  {detailsData.province}
+                </p>
+                <p>
+                  <span className="bottomInfoTags">District:</span>{' '}
+                  {detailsData.district}
+                </p>
+                <p>
+                  <span className="bottomInfoTags">Bridge Type:</span>{' '}
+                  {detailsData.type}
+                </p>
+                <p>
+                  <span className="bottomInfoTags">Project Sub Stage:</span>{' '}
+                  {detailsData.sub_stage}
+                </p>
+                <p>
+                  <span className="bottomInfoTags">Project Stage:</span>{' '}
+                  {detailsData.stage}
+                </p>
+              </div>
+              <div className="bottom_info_cols">
+                <p>
+                  <span className="bottomInfoTags">
+                    Estimate of People Served:
+                  </span>{' '}
+                  {detailsData.Individuals_directly_served}
+                </p>
+                <p>
+                  <span className="bottomInfoTags">AVG Households Served:</span>{' '}
+                  {detailsData.inc_income}
+                </p>
+                <p>
+                  <span className="bottomInfoTags">Economic Impact (RWF):</span>{' '}
+                  {detailsData.inc_income_rwf}
+                </p>
+                <p>
+                  <span className="bottomInfoTags">Economic Impact (USD):</span>{' '}
+                  {detailsData.inc_income_usd}
+                </p>
+              </div>
+            </div>
+          </Typography>
+        </CardContent>
+        {/* </Collapse> */}
+      </Card>
+    </div>
+    // </Draggable>
   );
 };
 
