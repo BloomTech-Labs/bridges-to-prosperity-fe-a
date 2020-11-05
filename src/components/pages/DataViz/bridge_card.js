@@ -46,9 +46,6 @@ const BridgeCard = () => {
           <div className="closeArea">
             <div
               className="close_button"
-              onKeyDown={e => {
-                console.log(e);
-              }}
               onClick={() => setDetailsData(null)}
               onMouseOver={() => setCloseBtn(true)}
               onMouseOut={() => setCloseBtn(false)}
@@ -118,17 +115,6 @@ const BridgeCard = () => {
                 </p>
               </div>
               <div className="bottom_info_cols">
-                {/* currently unsure if following info could be implemented */}
-                {/* <p>
-                  <span className="bottomInfoTags">
-                    Estimate of People Served:
-                  </span>{' '}
-                  {detailsData.Individuals_directly_served}
-                </p> */}
-                {/* <p>
-                  <span className="bottomInfoTags">AVG Households Served:</span>{' '}
-                  {detailsData.inc_income}
-                </p> */}
                 <p>
                   <span className="bottomInfoTags">Economic Impact (RWF):</span>{' '}
                   {detailsData.inc_income_rwf}
