@@ -390,11 +390,8 @@ const RenderMap = () => {
             />
           </div>
         </div>
-        {/* {fullscreen && detailsData && <BridgeCard />} */}
-        {/* {fullscreen && detailsData && <DetailsInfo />} */}
       </ReactMapGL>
       {!fullscreen && detailsData && <BridgeCard />}
-      {/* {!fullscreen && detailsData && <DetailsInfo />} */}
     </div>
   );
 };
