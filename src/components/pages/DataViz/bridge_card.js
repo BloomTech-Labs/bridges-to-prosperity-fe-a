@@ -12,6 +12,8 @@ import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { BridgesContext } from '../../../state/bridgesContext';
 import RenderGraph from './Graphs/RenderGraph';
+import CancelIcon from '@material-ui/icons/Cancel';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,6 +36,7 @@ const useStyles = makeStyles(theme => ({
 
 const BridgeCard = () => {
   const { detailsData, setDetailsData } = useContext(BridgesContext);
+  const [closeBtn, setCloseBtn] = React.useState(false);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -54,8 +57,14 @@ const BridgeCard = () => {
                 console.log(e);
               }}
               onClick={() => setDetailsData(null)}
+              onMouseOver={() => setCloseBtn(true)}
+              onMouseOut={() => setCloseBtn(false)}
             >
-              Close
+              {closeBtn == true ? (
+                <HighlightOffIcon size="large" />
+              ) : (
+                <CancelIcon fontsize="large" />
+              )}
             </div>
           </div>
           <CardContent id="card_content">
@@ -70,24 +79,26 @@ const BridgeCard = () => {
             >
               <strong>
                 {' '}
-                <span id="bridge_name_intro"> Bridge name:</span>{' '}
+                <span id="bridge_name_intro"> Site:</span>{' '}
                 {detailsData.bridge_site_name}
               </strong>
             </Typography>
-            <div className="bridge-image">
-              {detailsData.bridge_image ? (
-                <CardMedia
-                  id="card_media"
-                  className={classes.media}
-                  title="bridge_image"
-                  image={detailsData.bridge_image}
-                />
-              ) : (
-                <div></div>
-              )}
-            </div>
-            <div className="graphDiv">
-              <RenderGraph data={detailsData} />
+            <div className="bridgeImgDiv-container">
+              <div className="bridge-image">
+                {detailsData.bridge_image ? (
+                  <CardMedia
+                    id="card_media"
+                    className={classes.media}
+                    title="bridge_image"
+                    image={detailsData.bridge_image}
+                  />
+                ) : (
+                  <div></div>
+                )}
+              </div>
+              <div className="graphDiv">
+                <RenderGraph data={detailsData} />
+              </div>
             </div>
             {/* <IconButton
                 style={{ color: 'white' }}
@@ -116,30 +127,30 @@ const BridgeCard = () => {
                   <span className="bottomInfoTags">District:</span>{' '}
                   {detailsData.district}
                 </p>
-                <p>
+                {/* <p>
                   <span className="bottomInfoTags">Bridge Type:</span>{' '}
                   {detailsData.type}
-                </p>
+                </p> */}
                 <p>
                   <span className="bottomInfoTags">Project Sub Stage:</span>{' '}
                   {detailsData.sub_stage}
                 </p>
                 <p>
                   <span className="bottomInfoTags">Project Stage:</span>{' '}
-                  {detailsData.stage}
+                  {detailsData.project_stage}
                 </p>
               </div>
               <div className="bottom_info_cols">
-                <p>
+                {/* <p>
                   <span className="bottomInfoTags">
                     Estimate of People Served:
                   </span>{' '}
                   {detailsData.Individuals_directly_served}
-                </p>
-                <p>
+                </p> */}
+                {/* <p>
                   <span className="bottomInfoTags">AVG Households Served:</span>{' '}
                   {detailsData.inc_income}
-                </p>
+                </p> */}
                 <p>
                   <span className="bottomInfoTags">Economic Impact (RWF):</span>{' '}
                   {detailsData.inc_income_rwf}
