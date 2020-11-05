@@ -86,9 +86,9 @@ const BridgeCard = () => {
                 <div></div>
               )}
             </div>
-            {/* <div clasName="graphDiv">
-                  <RenderGraph data={detailsData} />
-                </div> */}
+            <div className="graphDiv">
+              <RenderGraph data={detailsData} />
+            </div>
             {/* <IconButton
                 style={{ color: 'white' }}
                 className={clsx(classes.expand, {

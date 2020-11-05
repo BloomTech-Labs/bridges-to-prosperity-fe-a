@@ -187,12 +187,14 @@
   background-color: #161345;
   cursor: default;
 }
-.graph {
-  height: auto;
-  width: auto;
-}
+// .graph {
+  // background-color: white;
+//   height: auto;
+//   width: auto;
+// }
 .graphDiv {
-  width: 200px;
+  background-color: white;
+  width: 100%;
 }
 .no-bridge-image {
   padding: 0.5rem;
