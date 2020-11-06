@@ -2,38 +2,33 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 
 const RenderGraph = () => {
+  const graphWidth = window.innerWidth * 0.25;
+  const graphHeight = window.innerHeight * 0.4;
+
   const trace1 = {
-    y: [5500, 200, 3302],
-    x: ['Total Population', 'Total Served', 'Growth'],
+    x: [5500, 2000, 302],
+    y: ['Population', 'Accessable Services', 'Growth'],
+    orientation: 'h',
     type: 'bar',
-    name: 'Social Effect',
-  };
-  const trace2 = {
-    y: [500, 3300, 302],
-    x: ['Total Population', 'Total Served', 'Growth'],
-    type: 'bar',
-    name: 'Economic Effect (USD)',
-  };
-  const trace3 = {
-    y: [5200, 3320, 3602],
-    x: ['Total Population', 'Total Served', 'Growth'],
-    type: 'bar',
-    name: 'Economic Effect (RWF)',
   };
 
-  const data = [trace1, trace2, trace3];
+  const data = [trace1];
   const layout = {
-    width: 490,
-    height: 320,
+    width: graphWidth,
+    height: graphHeight,
+    autosize: false,
     font: { size: 11 },
-    showlegend: true,
-    legend: {
-      x: 0.5,
-      xanchor: 'center',
-      y: 1.6,
-    },
+    showlegend: false,
     plot_bgcolor: '#161345',
     color: 'white',
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    yaxis: {
+      automargin: true,
+    },
+    xaxis: {
+      automargin: true,
+    },
   };
 
   return (

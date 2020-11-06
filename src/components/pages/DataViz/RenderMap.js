@@ -40,7 +40,7 @@ const RenderMap = () => {
   const [viewport, setViewport] = useState({
     latitude: -1.9444,
     longitude: 30.0616,
-    zoom: 3.1,
+    zoom: 7.5,
     bearing: 0,
     pitch: 0,
   });
@@ -391,11 +391,8 @@ const RenderMap = () => {
             />
           </div>
         </div>
-        {fullscreen && detailsData && <BridgeCard />}
-        {/* {fullscreen && detailsData && <DetailsInfo />} */}
       </ReactMapGL>
       {!fullscreen && detailsData && <BridgeCard />}
-      {/* {!fullscreen && detailsData && <DetailsInfo />} */}
     </div>
   );
 };
