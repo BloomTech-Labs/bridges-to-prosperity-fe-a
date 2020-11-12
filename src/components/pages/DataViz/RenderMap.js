@@ -23,6 +23,7 @@ import prospectingPin from '../../../styles/imgs/newIcons/Prospecting.png';
 import underConstructionPin from '../../../styles/imgs/newIcons/Under Construction.png';
 import '../DataViz/Graphs/LeftSideBar';
 import LeftSideBar from '../DataViz/Graphs/LeftSideBar';
+import noStatus from '../../../styles/imgs/newIcons/No Status.png';
 
 let maxBounds = {
   minLatitude: -70,
@@ -273,9 +274,9 @@ const RenderMap = () => {
           if (!mapRef) return;
           const map = mapRef.current.getMap();
 
-          map.loadImage(bridgePin, (error, image) => {
+          map.loadImage(noStatus, (error, image) => {
             if (error) return;
-            map.addImage('myPin', image);
+            map.addImage('noStatusPin', image);
           });
 
           map.loadImage(rejectPin, (error, image) => {
@@ -324,7 +325,7 @@ const RenderMap = () => {
                 'prospectingPin',
                 'Under Construction',
                 'underConstructionPin',
-                'myPin',
+                'noStatusPin',
               ],
               'icon-size': [
                 'interpolate',
