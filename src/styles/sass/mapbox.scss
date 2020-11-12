@@ -45,6 +45,7 @@
       border-radius: 10px;
     }
   }
+
   .desktop {
     .search-bar {
       position: absolute;
@@ -54,6 +55,7 @@
       z-index: 0;
       display: none;
     }
+
     .check-box {
       position: absolute;
       margin: 8px 0 0 50px;
@@ -69,6 +71,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
         .checkbox-list {
           display: flex;
         }
@@ -89,6 +92,7 @@
     border-radius: 5px;
     margin: 5px 0 0 5px;
   }
+
   @media only screen and (max-width: 1350px) {
     width: 100%;
 
@@ -103,9 +107,11 @@
       border-radius: 5px;
       margin: 5px 0 0 5px;
     }
+
     .hidden {
       display: none;
     }
+
     .desktop {
       .search-bar {
         position: absolute;
@@ -114,6 +120,7 @@
         z-index: 0;
         margin: 45px 0 0 0;
       }
+
       .check-box {
         display: flex;
         flex-direction: column;
@@ -142,10 +149,11 @@
     }
   }
 }
+
 .overlays {
   border: 3px solid #161345;
-  // box-shadow: 0px 2px 30px 0px #13113e;
 }
+
 .map_container {
   background-image: URL('../imgs/itote-rubombora-8PF8fl6e6yE-unsplash.jpg');
   background-repeat: no-repeat;
@@ -162,16 +170,19 @@
   background-color: white;
   width: 100%;
 }
+
 .no-bridge-image {
   padding: 0.5rem;
   text-align: center;
   color: #009149;
   font-family: 'bridge-font-bd';
 }
+
 #card_media {
   min-height: 200px;
   width: 100%;
 }
+
 #bridge_name_intro {
   font-size: medium;
   margin-right: 2px;
@@ -186,6 +197,7 @@
 .bottom_info_cols {
   width: 45%;
 }
+
 .bottomInfoTags {
   font-size: 0.75rem;
   text-decoration: underline;
