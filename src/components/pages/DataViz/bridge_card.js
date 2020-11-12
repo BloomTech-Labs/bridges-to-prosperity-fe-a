@@ -76,12 +76,13 @@ const BridgeCard = () => {
             <div className="bridgeImgDiv-container">
               <div className="bridge-image">
                 {detailsData.bridge_image ? (
-                  <CardMedia
-                    id="card_media"
-                    className={classes.media}
-                    title="bridge_image"
-                    image={detailsData.bridge_image}
-                  />
+                  // <CardMedia
+                  //   id="card_media"
+                  //   className={classes.media}
+                  //   title="bridge_image"
+                  //   image={detailsData.bridge_image}
+                  // />
+                  <img src={detailsData.bridge_image} />
                 ) : (
                   <div></div>
                 )}

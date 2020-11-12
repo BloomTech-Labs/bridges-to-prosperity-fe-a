@@ -24,6 +24,7 @@ import underConstructionPin from '../../../styles/imgs/newIcons/Under Constructi
 import '../DataViz/Graphs/LeftSideBar';
 import LeftSideBar from '../DataViz/Graphs/LeftSideBar';
 import noStatus from '../../../styles/imgs/newIcons/No Status.png';
+import hospitalPin from '../../../styles/imgs/newIcons/hospital.png';
 
 let maxBounds = {
   minLatitude: -70,
@@ -33,7 +34,7 @@ let maxBounds = {
 };
 
 const RenderMap = () => {
-  const { bridgeData, detailsData, setDetailsData } = useContext(
+  const { bridgeData, detailsData, setDetailsData, hospitalData } = useContext(
     BridgesContext
   );
   const [fullscreen, setFullscreen] = useState(false);
@@ -66,10 +67,27 @@ const RenderMap = () => {
   };
   let featureCollection = [];
 
+  let hospitaljson = {
+    type: 'FeatureCollection',
+    features: [],
+  };
+
+  if (hospitalData) {
+    hospitalData.forEach(hospital => {
+      hospitaljson.features.push({
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [hospital.long, hospital.lat],
+        },
+      });
+    });
+  }
+
   //this will run function after bridges will be filtered
   function certainBridgeShows(bridges) {
     bridges.forEach(bridge => {
-      if (bridge.project_stage === 'Rejected') {
+      if (bridge.stage === 'Rejected') {
         featureCollection.push({
           type: 'Feature',
           geometry: {
@@ -80,7 +98,7 @@ const RenderMap = () => {
             title: 'Rejected',
           },
         });
-      } else if (bridge.project_stage === 'Complete') {
+      } else if (bridge.stage === 'Complete') {
         featureCollection.push({
           type: 'Feature',
           geometry: {
@@ -91,7 +109,7 @@ const RenderMap = () => {
             title: 'Complete',
           },
         });
-      } else if (bridge.project_stage === 'Identified') {
+      } else if (bridge.stage === 'Identified') {
         featureCollection.push({
           type: 'Feature',
           geometry: {
@@ -102,7 +120,7 @@ const RenderMap = () => {
             title: 'Identified',
           },
         });
-      } else if (bridge.project_stage === 'Confirmed') {
+      } else if (bridge.stage === 'Confirmed') {
         featureCollection.push({
           type: 'Feature',
           geometry: {
@@ -113,7 +131,7 @@ const RenderMap = () => {
             title: 'Confirmed',
           },
         });
-      } else if (bridge.project_stage === 'Prospecting') {
+      } else if (bridge.stage === 'Prospecting') {
         featureCollection.push({
           type: 'Feature',
           geometry: {
@@ -124,7 +142,7 @@ const RenderMap = () => {
             title: 'Prospecting',
           },
         });
-      } else if (bridge.project_stage === 'Under Construction') {
+      } else if (bridge.stage === 'Under Construction') {
         featureCollection.push({
           type: 'Feature',
           geometry: {
@@ -148,38 +166,30 @@ const RenderMap = () => {
   }
   // bridges are now being filtered by the bridges stages
   if (bridgeData) {
-    let rejected = bridgeData.filter(
-      bridge => bridge.project_stage === 'Rejected'
-    );
+    let rejected = bridgeData.filter(bridge => bridge.stage === 'Rejected');
     if (rejectedChecked) {
       certainBridgeShows(rejected);
     }
-    let Identified = bridgeData.filter(
-      bridge => bridge.project_stage === 'Identified'
-    );
+    let Identified = bridgeData.filter(bridge => bridge.stage === 'Identified');
     if (identifiedChecked) {
       certainBridgeShows(Identified);
     }
-    let Complete = bridgeData.filter(
-      bridge => bridge.project_stage === 'Complete'
-    );
+    let Complete = bridgeData.filter(bridge => bridge.stage === 'Complete');
     if (completedChecked) {
       certainBridgeShows(Complete);
     }
-    let Confirmed = bridgeData.filter(
-      bridge => bridge.project_stage === 'Confirmed'
-    );
+    let Confirmed = bridgeData.filter(bridge => bridge.stage === 'Confirmed');
     if (confirmedChecked) {
       certainBridgeShows(Confirmed);
     }
     let Prospecting = bridgeData.filter(
-      bridge => bridge.project_stage === 'Prospecting'
+      bridge => bridge.stage === 'Prospecting'
     );
     if (prospectingChecked) {
       certainBridgeShows(Prospecting);
     }
     let Under_Construction = bridgeData.filter(
-      bridge => bridge.project_stage === 'Under Construction'
+      bridge => bridge.stage === 'Under Construction'
     );
     if (constructionChecked) {
       certainBridgeShows(Under_Construction);
@@ -263,10 +273,10 @@ const RenderMap = () => {
         {...viewport}
         width={screenWidth}
         height={screenHeight}
-        mapStyle="mapbox://styles/troyamlee/ckh15cpcw03hd19p8xy1dus5c"
+        mapStyle="mapbox://styles/bridgestoprosperity/ckhdtr11l01bf19pj2hkgevfk"
         onViewportChange={handleViewportChange}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        interactiveLayerIds={['data']}
+        interactiveLayerIds={['data', 'hospital']}
         onClick={handleClick}
         maxZoom={40}
         minZoom={1}
@@ -303,6 +313,11 @@ const RenderMap = () => {
             if (error) return;
             map.addImage('underConstructionPin', image);
           });
+
+          map.loadImage(hospitalPin, (error, image) => {
+            if (error) return;
+            map.addImage('hospitalPin', image);
+          });
         }}
       >
         <Source id="my-data" type="geojson" data={geojson}>
@@ -327,6 +342,29 @@ const RenderMap = () => {
                 'underConstructionPin',
                 'noStatusPin',
               ],
+              'icon-size': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                4,
+                0.45,
+                6,
+                0.35,
+                10,
+                0.25,
+                15,
+                0.2,
+              ],
+            }}
+          />
+        </Source>
+
+        <Source id="hospital-data" type="geojson" data={hospitaljson}>
+          <Layer
+            id="hospital"
+            type="symbol"
+            layout={{
+              'icon-image': 'hospitalPin',
               'icon-size': [
                 'interpolate',
                 ['linear'],
@@ -377,7 +415,7 @@ const RenderMap = () => {
             />
           </div>
 
-          {/* <div className="check-box">
+          <div className="check-box">
             <FilterBridgesCheckboxes
               certainBridgeShows={certainBridgeShows}
               completedChecked={completedChecked}
@@ -393,7 +431,7 @@ const RenderMap = () => {
               constructionChecked={constructionChecked}
               setConstructionChecked={setConstructionChecked}
             />
-          </div> */}
+          </div>
         </div>
       </ReactMapGL>
       <LeftSideBar sidebar={sidebar} setSidebar={setSidebar} />

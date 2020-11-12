@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // we will define a bunch of API calls here.
-const apiUrl = `${process.env.REACT_APP_API_URI}/profiles`;
+const apiUrl = `${process.env.REACT_APP_API_URI}`;
 
 const sleep = time =>
   new Promise(resolve => {
@@ -49,4 +49,32 @@ const getProfileData = authState => {
   }
 };
 
-export { sleep, getExampleData, getProfileData, getDSData };
+const getBridgeData = state => {
+  return axios
+    .get(`${apiUrl}/bridges`)
+    .then(response => response.data)
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+const getHospitalData = state => {
+  return axios
+    .get(`${apiUrl}/hospitals`)
+    .then(response => {
+      return response.data;
+      // console.log(response.data)
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export {
+  sleep,
+  getExampleData,
+  getProfileData,
+  getDSData,
+  getHospitalData,
+  getBridgeData,
+};
