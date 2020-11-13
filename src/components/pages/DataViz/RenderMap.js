@@ -88,6 +88,7 @@ const RenderMap = () => {
   function certainBridgeShows(bridges) {
     bridges.forEach(bridge => {
       if (bridge.stage === 'Rejected') {
+
         featureCollection.push({
           type: 'Feature',
           geometry: {
@@ -264,6 +265,10 @@ const RenderMap = () => {
     }
   }
 
+  let hoveredStateId = null;
+
+  const paint = {};
+
   return (
     <div className="mapbox-react">
       <ReactMapGL
@@ -280,6 +285,21 @@ const RenderMap = () => {
         onClick={handleClick}
         maxZoom={40}
         minZoom={1}
+        // onMouseMove={(e) => {
+        //   if (e.features.length > 0) {
+        //     if (hoveredStateId) {
+        //       e.setFeatureState(
+        //         { source: 'village-boundaries', id: hoveredStateId },
+        //         { hover: false }
+        //       );
+        //     }
+        //     hoveredStateId = e.features[0].id;
+        //     e.setFeatureState(
+        //       { source: 'village-boundaries', id: hoveredStateId },
+        //       { hover: true }
+        //     );
+        //   }
+        // }}
         onLoad={() => {
           if (!mapRef) return;
           const map = mapRef.current.getMap();
@@ -320,6 +340,58 @@ const RenderMap = () => {
           });
         }}
       >
+        {/*This source component can be edited to show villages, districts, and
+        sectors*/}
+        <Source
+          id="village-boundaries"
+          type="vector"
+          promoted="Distr_ID"
+          url="mapbox://bridgestoprosperity.85sos76r"
+        >
+          <Layer
+            id="boundaries"
+            type="fill"
+            source="village-boundaries"
+            source-layer="Rwanda_Village_Boundaries2-agbitm"
+            paint={{
+              'fill-color': [
+                'rgb',
+                ['%', ['*', 1023, ['to-number', ['get', 'Distr_ID']]], 256],
+                ['%', ['*', 757, ['to-number', ['get', 'Distr_ID']]], 256],
+                ['%', ['*', 911, ['to-number', ['get', 'Distr_ID']]], 256],
+              ],
+              'fill-opacity': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], true],
+                0.2,
+                0.4,
+              ],
+            }}
+          />
+        </Source>
+        <Layer
+          id="layer2"
+          type="symbol"
+          source="village-boundaries"
+          source-layer="Rwanda_Village_Boundaries2-agbitm"
+          layout={{
+            'text-field': [
+              'format',
+              ['get', 'Name'],
+              { 'font-scale': 1.0 },
+              '\n',
+              {},
+              ['get', 'title'],
+              {
+                'font-scale': 0.8,
+                'text-font': [
+                  'literal',
+                  ['DIN Offc Pro Italic', 'Arial Unicode MS Regular'],
+                ],
+              },
+            ],
+          }}
+        />
         <Source id="my-data" type="geojson" data={geojson}>
           <Layer
             id="data"
@@ -359,6 +431,7 @@ const RenderMap = () => {
           />
         </Source>
 
+
         <Source id="hospital-data" type="geojson" data={hospitaljson}>
           <Layer
             id="hospital"
@@ -381,7 +454,6 @@ const RenderMap = () => {
             }}
           />
         </Source>
-
         <div className="toggle">
           <MenuOutlined
             onClick={() => {
@@ -398,7 +470,6 @@ const RenderMap = () => {
         >
           <FullscreenControl />
         </div>
-
         <div className="navigationControl">
           <NavigationControl />
         </div>
