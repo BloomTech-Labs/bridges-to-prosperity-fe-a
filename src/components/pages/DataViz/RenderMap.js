@@ -12,7 +12,6 @@ import ReactMapGL, {
 } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder';
 import { BridgesContext } from '../../../state/bridgesContext';
-// import DetailsInfo from './DetailsInfo';
 import BridgeCard from './bridge_card';
 import FilterBridgesCheckboxes from './FilterBridgesCheckboxes';
 import bridgePin from '../../../styles/imgs/pin.png';
@@ -22,6 +21,8 @@ import identifiedPin from '../../../styles/imgs/newIcons/Identified.png';
 import confirmedPin from '../../../styles/imgs/newIcons/Confirmed.png';
 import prospectingPin from '../../../styles/imgs/newIcons/Prospecting.png';
 import underConstructionPin from '../../../styles/imgs/newIcons/Under Construction.png';
+import '../DataViz/Graphs/LeftSideBar';
+import LeftSideBar from '../DataViz/Graphs/LeftSideBar';
 import noStatus from '../../../styles/imgs/newIcons/No Status.png';
 
 let maxBounds = {
@@ -52,6 +53,7 @@ const RenderMap = () => {
   const [confirmedChecked, setConfirmedChecked] = useState(false);
   const [prospectingChecked, setProspectingChecked] = useState(false);
   const [constructionChecked, setConstructionChecked] = useState(false);
+  const [sidebar, setSidebar] = useState(false);
 
   useKeypress('Escape', () => {
     setFullscreen(false);
@@ -64,7 +66,7 @@ const RenderMap = () => {
   };
   let featureCollection = [];
 
-  //this will run function after brindges will be filtered
+  //this will run function after bridges will be filtered
   function certainBridgeShows(bridges) {
     bridges.forEach(bridge => {
       console.log(bridge);
@@ -145,7 +147,7 @@ const RenderMap = () => {
       }
     });
   }
-  // bridges are now being filtered by the bidge stages
+  // bridges are now being filtered by the bridges stages
   if (bridgeData) {
     let rejected = bridgeData.filter(
       bridge => bridge.project_stage === 'Rejected'
@@ -416,11 +418,13 @@ const RenderMap = () => {
         <div className="toggle">
           <MenuOutlined
             onClick={() => {
-              myFunction();
+              // myFunction();
+              setSidebar(true);
             }}
             style={{ fontSize: '20px' }}
           />
         </div>
+
         <div
           className="fullScreenControl"
           onClick={() => setFullscreen(!fullscreen)}
@@ -443,7 +447,7 @@ const RenderMap = () => {
             />
           </div>
 
-          <div className="check-box">
+          {/* <div className="check-box">
             <FilterBridgesCheckboxes
               certainBridgeShows={certainBridgeShows}
               completedChecked={completedChecked}
@@ -459,9 +463,10 @@ const RenderMap = () => {
               constructionChecked={constructionChecked}
               setConstructionChecked={setConstructionChecked}
             />
-          </div>
+          </div> */}
         </div>
       </ReactMapGL>
+      <LeftSideBar sidebar={sidebar} setSidebar={setSidebar} />
       {!fullscreen && detailsData && <BridgeCard />}
     </div>
   );
