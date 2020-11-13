@@ -35,6 +35,7 @@ function App() {
   const history = useHistory();
 
   const [bridgeData, setBridgeData] = useState();
+  const [hospitalData, setHospitalData] = useState();
   const [detailsData, setDetailsData] = useState();
 
   const authHandler = () => {
@@ -45,7 +46,14 @@ function App() {
 
   return (
     <BridgesContext.Provider
-      value={{ bridgeData, setBridgeData, detailsData, setDetailsData }}
+      value={{
+        bridgeData,
+        setBridgeData,
+        detailsData,
+        setDetailsData,
+        hospitalData,
+        setHospitalData,
+      }}
     >
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
