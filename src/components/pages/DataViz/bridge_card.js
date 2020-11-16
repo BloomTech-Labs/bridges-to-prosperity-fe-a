@@ -3,10 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { BridgesContext } from '../../../state/bridgesContext';
-import RenderGraph from './Graphs/RenderGraph';
 import CancelIcon from '@material-ui/icons/Cancel';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
@@ -72,27 +70,6 @@ const BridgeCard = () => {
                 <span id="bridge_name_intro"> Site:</span> {detailsData.name}
               </strong>
             </Typography>
-            <div className="bridgeImgDiv-container">
-              <div className="bridge-image">
-                {/* {detailsData.bridge_image ? (
-                  // <CardMedia
-                  //   id="card_media"
-                  //   className={classes.media}
-                  //   title="bridge_image"
-                  //   image={detailsData.bridge_image}
-                  // />
-                  <img src={detailsData.bridge_image} />
-                ) : (
-                  <div></div>
-                )} */}
-              </div>
-              {/* <div className="graphDiv">
-                <RenderGraph data={detailsData} />
-                <p>Crossing Deaths (within the past three years): {detailsData.crossing_deaths ? detailsData.crossing_deaths : 0}</p>
-                <p>Crossing Injuries (within the past three years): {detailsData.crossing_injuries ? detailsData.crossing_injuries : 0}</p>
-                <p>Crossing Incident Description: {detailsData.crossing_incident_desc ? detailsData.crossing_incident_desc : `No available records`}</p>
-              </div> */}
-            </div>
           </CardContent>
         </CardActionArea>
 
@@ -239,8 +216,6 @@ const BridgeCard = () => {
                   </p>
                 </div>
               </div>
-              {/* <div className="bottom_info_cols">
-              </div> */}
             </div>
           </Typography>
         </CardContent>
