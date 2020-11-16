@@ -41,7 +41,7 @@ const BridgeCard = () => {
 
   return (
     <div className="detailsContainer">
-      <Card className={detailsData.root}>
+      <Card className="detailsContainer-card">
         <CardActionArea>
           <div className="closeArea">
             <div
@@ -69,13 +69,12 @@ const BridgeCard = () => {
             >
               <strong>
                 {' '}
-                <span id="bridge_name_intro"> Site:</span>{' '}
-                {detailsData.bridge_site_name}
+                <span id="bridge_name_intro"> Site:</span> {detailsData.name}
               </strong>
             </Typography>
             <div className="bridgeImgDiv-container">
               <div className="bridge-image">
-                {detailsData.bridge_image ? (
+                {/* {detailsData.bridge_image ? (
                   // <CardMedia
                   //   id="card_media"
                   //   className={classes.media}
@@ -85,11 +84,14 @@ const BridgeCard = () => {
                   <img src={detailsData.bridge_image} />
                 ) : (
                   <div></div>
-                )}
+                )} */}
               </div>
-              <div className="graphDiv">
+              {/* <div className="graphDiv">
                 <RenderGraph data={detailsData} />
-              </div>
+                <p>Crossing Deaths (within the past three years): {detailsData.crossing_deaths ? detailsData.crossing_deaths : 0}</p>
+                <p>Crossing Injuries (within the past three years): {detailsData.crossing_injuries ? detailsData.crossing_injuries : 0}</p>
+                <p>Crossing Incident Description: {detailsData.crossing_incident_desc ? detailsData.crossing_incident_desc : `No available records`}</p>
+              </div> */}
             </div>
           </CardContent>
         </CardActionArea>
@@ -97,34 +99,148 @@ const BridgeCard = () => {
         <CardContent>
           <Typography paragraph>
             <div className="bottom_info">
-              <div className="bottom_info_cols">
+              <div className="bottom_info_projectInfo">
                 <p>
-                  <span className="bottomInfoTags">Province:</span>{' '}
-                  {detailsData.province}
-                </p>
-                <p>
-                  <span className="bottomInfoTags">District:</span>{' '}
-                  {detailsData.district}
-                </p>
-                <p>
-                  <span className="bottomInfoTags">Project Sub Stage:</span>{' '}
-                  {detailsData.sub_stage}
+                  <span className="bottomInfoTags">Project Code:</span>{' '}
+                  {detailsData.project_code
+                    ? detailsData.project_code
+                    : 'Content unavailable'}
                 </p>
                 <p>
                   <span className="bottomInfoTags">Project Stage:</span>{' '}
-                  {detailsData.project_stage}
+                  {detailsData.stage
+                    ? detailsData.stage
+                    : 'Content unavailable'}
                 </p>
               </div>
+              <hr />
               <div className="bottom_info_cols">
-                <p>
-                  <span className="bottomInfoTags">Economic Impact (RWF):</span>{' '}
-                  {detailsData.inc_income_rwf}
-                </p>
-                <p>
-                  <span className="bottomInfoTags">Economic Impact (USD):</span>{' '}
-                  {detailsData.inc_income_usd}
-                </p>
+                <div className="bottom_info_cols_social">
+                  <h1>Social Information</h1>
+                  <p>
+                    <span className="bottomInfoTags">
+                      Individuals Directly Served:
+                    </span>{' '}
+                    {detailsData.individuals_directly_served
+                      ? detailsData.individuals_directly_served
+                      : 'Content unavailable'}
+                  </p>
+                  <p>
+                    <span className="bottomInfoTags">
+                      Crossing Deaths within that past 3 years:
+                    </span>{' '}
+                    {detailsData.crossing_deaths
+                      ? detailsData.crossing_deaths
+                      : 0}
+                  </p>
+                  <p>
+                    <span className="bottomInfoTags">
+                      Crossing Injuries within the past 3 years:
+                    </span>{' '}
+                    {detailsData.crossing_injuries
+                      ? detailsData.crossing_injuries
+                      : 0}
+                  </p>
+                  <p>
+                    <span className="bottomInfoTags">
+                      Crossing Incident Description:
+                    </span>{' '}
+                    {detailsData.crossing_incident_desc
+                      ? detailsData.crossing_incident_desc
+                      : `No available records`}
+                  </p>
+                </div>
+                <hr />
+                <div className="bottom_info_cols_loca">
+                  <h1>Location Information</h1>
+                  <p>
+                    <span className="bottomInfoTags">Province:</span>{' '}
+                    {detailsData.province
+                      ? detailsData.province
+                      : 'Content unavailable'}
+                  </p>
+                  <p>
+                    <span className="bottomInfoTags">District:</span>{' '}
+                    {detailsData.district
+                      ? detailsData.district
+                      : 'Content unavailable'}
+                  </p>
+                  <p>
+                    <span className="bottomInfoTags">Closest City:</span>{' '}
+                    {detailsData.nearest_city
+                      ? detailsData.nearest_city
+                      : 'Content unavailable'}
+                  </p>
+                  <p>
+                    <span className="bottomInfoTags">
+                      Distance to Closest Hospital:
+                    </span>{' '}
+                    {detailsData.distance_from_hospital
+                      ? detailsData.distance_from_hospital
+                      : 'Content unavailable'}
+                  </p>
+                  <p>
+                    <span className="bottomInfoTags">Land Owned by:</span>{' '}
+                    {detailsData.land_ownership
+                      ? detailsData.land_ownership
+                      : 'Unknown'}
+                  </p>
+                  <p>
+                    <span className="bottomInfoTags">
+                      Permission from Land Ownser:
+                    </span>{' '}
+                    {detailsData.land_ownership_permission
+                      ? detailsData.land_ownership_permission
+                      : 'Unknown'}
+                  </p>
+                  <p>
+                    <span className="bottomInfoTags">Local Recorded Data:</span>{' '}
+                    {detailsData.social_info
+                      ? detailsData.social_info
+                      : 'Content unavailable'}
+                  </p>
+                </div>
+                <hr />
+                <div className="bottom_info_cols_bridge">
+                  <h1>Additional Bridge Information</h1>
+                  <p>
+                    {detailsData.type ? (
+                      <span>
+                        <span className="bottomInfoTags">Type of Bridge: </span>
+                        {detailsData.type}
+                      </span>
+                    ) : null}
+                  </p>
+                  <p>
+                    {detailsData.span ? (
+                      <span>
+                        <span className="bottomInfoTags">Bridge Span: </span>
+                        {detailsData.span}
+                      </span>
+                    ) : null}
+                  </p>
+                  <p>
+                    {detailsData.stage == 'Rejected' ? (
+                      <span>
+                        <span className="bottomInfoTags">
+                          Reason for Rejection:{' '}
+                        </span>
+                        {detailsData.rejected_comments}
+                      </span>
+                    ) : (
+                      <div></div>
+                    )}
+                  </p>
+                  <p>
+                    <span className="bottomInfoTags">Bridge requested by:</span>{' '}
+                    {detailsData.form_requested_by
+                      ? detailsData.form_requested_by
+                      : 'Content unavailable'}
+                  </p>
+                </div>
               </div>
+              {/* <div className="bottom_info_cols">
+              </div> */}
             </div>
           </Typography>
         </CardContent>

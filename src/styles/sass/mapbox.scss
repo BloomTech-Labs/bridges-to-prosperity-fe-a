@@ -26,6 +26,10 @@
     width: 40%;
     color: whitesmoke;
 
+    .detailsContainer-card {
+      min-height: 100%;
+    }
+
     .closeArea {
       display: flex;
       justify-content: flex-end;
@@ -189,13 +193,39 @@
 }
 
 .bottom_info {
+  height: 100%;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
   font-size: 1rem;
+
+  hr {
+    width: 100%;
+    border-top: solid rgba(120, 120, 120, 100);
+  }
+
+  .bottom_info_projectInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
 }
 
 .bottom_info_cols {
-  width: 45%;
+  width: 100%;
+  padding: 0 5%;
+
+
+  h1 {
+    color: #161345;
+    font-size: 1.4rem;
+  }
+
+  .bottomInfoTags {
+    font-size: .9rem;
+    font-weight: bold;
+  }
 }
 
 .bottomInfoTags {
