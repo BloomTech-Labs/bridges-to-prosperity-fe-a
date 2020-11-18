@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -30,12 +31,25 @@ const useStyles = makeStyles(theme => ({
 const BridgeCard = () => {
   const { detailsData, setDetailsData } = useContext(BridgesContext);
   const [closeBtn, setCloseBtn] = React.useState(false);
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [loadingPredictModel, setLoadingPredictModel] = React.useState(true);
+  const [predictModel, setPredictModel] = React.useState();
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  useEffect(() => {
+    setLoadingPredictModel(true);
+    axios
+      .post(`https://a-ds.bridgestoprosperity.dev/predict`, {
+        Project_Code: `${detailsData.project_code}`,
+      })
+      .then(response => {
+        setPredictModel(response.data);
+        setLoadingPredictModel(false);
+      })
+      .catch(error => {
+        setPredictModel('Content unavailable');
+        setLoadingPredictModel(false);
+        console.log(error.response);
+      });
+  }, [detailsData]);
 
   return (
     <div className="detailsContainer">
@@ -93,6 +107,11 @@ const BridgeCard = () => {
               <hr />
               <div className="bottom_info_cols">
                 <div className="bottom_info_cols_social">
+                  <span className="bottomInfoTags">
+                    Bridge Possibility Evaluation:
+                  </span>{' '}
+                  {loadingPredictModel ? 'loading prediction...' : predictModel}
+                  <hr />
                   <h1>Social Information</h1>
                   <p>
                     <span className="bottomInfoTags">
