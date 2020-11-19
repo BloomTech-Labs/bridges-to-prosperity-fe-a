@@ -1,9 +1,11 @@
 # Bridges To Prosperity
 
 You can find the deployed project at https://27a.bridgestoprosperity.dev/
+
 Previous cohort: https://b.bridgestoprosperity.dev/
 
-You can find the demo video for this project at --filler--
+You can find the demo video for this project at: https://youtu.be/szCUG177M44
+
 Previous cohort:https://youtu.be/UkJIj0PbvIk
 
 ## Contributors
