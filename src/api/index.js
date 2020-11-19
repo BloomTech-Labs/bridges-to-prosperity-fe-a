@@ -52,7 +52,9 @@ const getProfileData = authState => {
 const getBridgeData = state => {
   return axios
     .get(`${apiUrl}/bridges`)
-    .then(response => response.data)
+    .then(response => {
+      return response.data;
+    })
     .catch(error => {
       console.log(error);
     });
