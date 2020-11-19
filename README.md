@@ -1,6 +1,6 @@
 # Bridges To Prosperity
 
-You can find the deployed project at https://27a.bridgestoprosperity.dev/
+You can find the deployed project at https://www.28a.bridgestoprosperity.dev/
 
 Previous cohort: https://b.bridgestoprosperity.dev/
 
